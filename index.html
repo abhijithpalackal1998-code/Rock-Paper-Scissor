@@ -5,23 +5,37 @@
         </title>
         <link rel="stylesheet" href="RPScss.css">
     </head>
-    <body class="col-12 col-sm-12 col-md-12">
+    <body class="col-4 col-sm-12 col-md-12">
         <p>Rock Paper Scissors</p>
-        <div class="button-container">
+        <div class="scoreboard">
+            <div class="score-item"><strong>You</strong><span id="playerScore">0</span></div>
+            <div class="score-item"><strong>Computer</strong><span id="computerScore">0</span></div>
+        </div>
+        <div class="button-container ">
             <button onclick="play('Rock')">Rock</button>
             <button onclick="play('Paper')">Paper</button>
             <button onclick="play('Scissors')">Scissors</button>
         </div>
+        <button id="resetButton" class="close-button reset-button" onclick="resetGame()">Restart</button>
 
         <div class="modal-backdrop" id="resultModal">
             <div class="modal">
                 <h2>Match Result</h2>
                 <p id="modalText"></p>
+                <p id="winnerText" class="winner-text"></p>
                 <button class="close-button" onclick="closeModal()">Close</button>
             </div>
         </div>
         <script>
+            let playerScore = 0;
+            let computerScore = 0;
+            let gameOver = false;
+
             function play(playerMove) {
+                if (gameOver) {
+                    return;
+                }
+
                 const randomNumber = Math.random();
                 let computerMove = '';
 
@@ -34,27 +48,47 @@
                 }
 
                 let result = '';
+                let winner = '';
+
                 if (computerMove === playerMove) {
                     result = 'It\'s a tie';
+                    winner = 'Tie';
                 } else if (
                     (playerMove === 'Rock' && computerMove === 'Scissors') ||
                     (playerMove === 'Paper' && computerMove === 'Rock') ||
                     (playerMove === 'Scissors' && computerMove === 'Paper')
                 ) {
                     result = 'Great!! You Won';
+                    winner = 'You';
+                    playerScore += 1;
                 } else {
                     result = 'Ooh noo.. You Lose';
+                    winner = 'Computer';
+                    computerScore += 1;
                 }
 
-                showResult(playerMove, computerMove, result);
+                if (playerScore >= 5 || computerScore >= 5) {
+                    gameOver = true;
+                }
+
+                updateScoreboard();
+                showResult(playerMove, computerMove, result, winner, gameOver);
             }
 
-            function showResult(playerMove, computerMove, result) {
+            function updateScoreboard() {
+                document.getElementById('playerScore').textContent = playerScore;
+                document.getElementById('computerScore').textContent = computerScore;
+            }
+
+            function showResult(playerMove, computerMove, result, winner, gameOver) {
                 const modal = document.getElementById('resultModal');
                 const modalText = document.getElementById('modalText');
+                const winnerText = document.getElementById('winnerText');
                 const modalBox = modal.querySelector('.modal');
+                const resetButton = document.getElementById('resetButton');
 
                 modalText.textContent = `Your move was ${playerMove}. My move is ${computerMove}. ${result}`;
+                winnerText.textContent = gameOver ? `Game Over: ${winner} wins the match!` : `Winner: ${winner}`;
                 modalBox.classList.remove('tie', 'win', 'lose');
 
                 if (result === 'It\'s a tie') {
@@ -65,6 +99,7 @@
                     modalBox.classList.add('lose');
                 }
 
+                resetButton.style.display = gameOver ? 'block' : 'none';
                 modal.classList.add('active');
             }
 
@@ -72,6 +107,14 @@
                 const modal = document.getElementById('resultModal');
                 modal.classList.remove('active');
                 modal.querySelector('.modal').classList.remove('tie', 'win', 'lose');
+            }
+
+            function resetGame() {
+                playerScore = 0;
+                computerScore = 0;
+                gameOver = false;
+                updateScoreboard();
+                closeModal();
             }
         </script>
     </body>
