@@ -1,0 +1,118 @@
+
+            body{
+                background: radial-gradient(circle at top left, #4d90ee 0%, #112d4e 55%, #0b1724 100%);
+                min-height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            p{
+                margin: 0 0 30px;
+                color: #f9f1d7;
+                font-size: 40px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.35);
+                border-radius: 12px;
+                width: 400px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            }
+            .button-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+            }
+            button{
+                margin: 0;
+                width: 180px;
+                height: 60px;
+                border: none;
+                border-radius: 14px;
+                background: linear-gradient(135deg, #69b7ff 0%, #4f87d7 100%);
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 0.5px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s ease, background 0.2s ease;
+            }
+            button:hover{
+                background: linear-gradient(135deg, #8cc6ff 0%, #6e9af5 100%);
+                transform: translateY(-2px);
+                cursor: pointer;
+            }
+            .modal-backdrop{
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(3, 15, 35, 0.75);
+                backdrop-filter: blur(4px);
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                z-index: 10;
+            }
+            .modal-backdrop.active{
+                display: flex;
+            }
+            .modal{
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(10px);
+                border-radius: 24px;
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+                max-width: 420px;
+                width: 100%;
+                padding: 28px 28px 24px;
+                color: #edf4ff;
+                text-align: center;
+            }
+            .modal.tie{
+                background: linear-gradient(180deg, rgba(255, 217, 93, 0.95), rgba(255, 186, 52, 0.95));
+                color: #2f1f00;
+            }
+            .modal.win{
+                background: linear-gradient(180deg, rgba(122, 209, 84, 0.95), rgba(70, 166, 80, 0.95));
+                color: #0f2d12;
+            }
+            .modal.lose{
+                background: linear-gradient(180deg, rgba(237, 101, 101, 0.95), rgba(184, 48, 48, 0.95));
+                color: #330d0d;
+            }
+            .modal h2{
+                margin-top: 0;
+                margin-bottom: 16px;
+                font-size: 30px;
+                letter-spacing: 0.75px;
+                color: inherit;
+            }
+            .modal p{
+                margin: 0 0 24px;
+                line-height: 1.75;
+                color: inherit;
+                font-size: 17px;
+                font-weight: 500;
+            }
+            .close-button{
+                width: 100%;
+                padding: 14px 0;
+                border: none;
+                border-radius: 12px;
+                background: linear-gradient(135deg, #f9d342 0%, #ffb347 100%);
+                color: #112d4e;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .close-button:hover{
+                opacity: 0.95;
+            }
+        

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock_Paper_Scissors</title>
+        <link rel="stylesheet" href="RPScss.css">
+    </head>
+    <body>
+        <p>Rock Paper Scissors</p>
+        <div class="button-container">
+            <button onclick="play('Rock')">Rock</button>
+            <button onclick="play('Paper')">Paper</button>
+            <button onclick="play('Scissor')">Scissor</button>
+        </div>
+
+        <div class="modal-backdrop" id="resultModal">
+            <div class="modal">
+                <h2>Match Result</h2>
+                <p id="modalText"></p>
+                <button class="close-button" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+        <script>
+            function play(playerMove) {
+                const randomNumber = Math.random();
+                let computerMove = '';
+
+                if (randomNumber < 1 / 3) {
+                    computerMove = 'Rock';
+                } else if (randomNumber < 2 / 3) {
+                    computerMove = 'Paper';
+                } else {
+                    computerMove = 'Scissor';
+                }
+
+                let result = '';
+                if (computerMove === playerMove) {
+                    result = 'It\'s a tie';
+                } else if (
+                    (playerMove === 'Rock' && computerMove === 'Scissor') ||
+                    (playerMove === 'Paper' && computerMove === 'Rock') ||
+                    (playerMove === 'Scissor' && computerMove === 'Paper')
+                ) {
+                    result = 'Great!! You Won';
+                } else {
+                    result = 'Ooh noo.. You Lose';
+                }
+
+                showResult(playerMove, computerMove, result);
+            }
+
+            function showResult(playerMove, computerMove, result) {
+                const modal = document.getElementById('resultModal');
+                const modalText = document.getElementById('modalText');
+                const modalBox = modal.querySelector('.modal');
+
+                modalText.textContent = `Your move was ${playerMove}. My move is ${computerMove}. ${result}`;
+                modalBox.classList.remove('tie', 'win', 'lose');
+
+                if (result === 'It\'s a tie') {
+                    modalBox.classList.add('tie');
+                } else if (result === 'Great!! You Won') {
+                    modalBox.classList.add('win');
+                } else {
+                    modalBox.classList.add('lose');
+                }
+
+                modal.classList.add('active');
+            }
+
+            function closeModal() {
+                const modal = document.getElementById('resultModal');
+                modal.classList.remove('active');
+                modal.querySelector('.modal').classList.remove('tie', 'win', 'lose');
+            }
+        </script>
+    </body>
+</html>
