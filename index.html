@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Rock_Paper_Scissors</title>
+        <title>Rock_Paper_Scissors
+        </title>
         <link rel="stylesheet" href="RPScss.css">
     </head>
     <body>
@@ -9,7 +10,7 @@
         <div class="button-container">
             <button onclick="play('Rock')">Rock</button>
             <button onclick="play('Paper')">Paper</button>
-            <button onclick="play('Scissor')">Scissor</button>
+            <button onclick="play('Scissors')">Scissors</button>
         </div>
 
         <div class="modal-backdrop" id="resultModal">
@@ -29,16 +30,16 @@
                 } else if (randomNumber < 2 / 3) {
                     computerMove = 'Paper';
                 } else {
-                    computerMove = 'Scissor';
+                    computerMove = 'Scissors';
                 }
 
                 let result = '';
                 if (computerMove === playerMove) {
                     result = 'It\'s a tie';
                 } else if (
-                    (playerMove === 'Rock' && computerMove === 'Scissor') ||
+                    (playerMove === 'Rock' && computerMove === 'Scissors') ||
                     (playerMove === 'Paper' && computerMove === 'Rock') ||
-                    (playerMove === 'Scissor' && computerMove === 'Paper')
+                    (playerMove === 'Scissors' && computerMove === 'Paper')
                 ) {
                     result = 'Great!! You Won';
                 } else {
